@@ -87,7 +87,7 @@ end
 
 function nnNode:graphNodeName()
    if self.data.annotations.name then
-      return self.data.annotations.name .. ' (' .. self.id .. ')'
+      return self.data.annotations.name
    else
       return 'Node' .. self.id
    end
@@ -139,7 +139,11 @@ function nnNode:label()
          for i,v in ipairs(data) do
             table.insert(tstr, getstr(v))
          end
-         return '{' .. table.concat(tstr,',') .. '}'
+         if #data > 3 then
+            return tostring(#data)
+         else
+            return '{' .. table.concat(tstr,',') .. '}'
+         end
       else
          return tostring(data):gsub('\n','\\l')
       end
